@@ -33,7 +33,15 @@ def multithread_starter():
 def process():
     if not os.path.exists("sessions"):
         os.mkdir("sessions")
-
+    print(r"""{}
+    _   _       _  ______       ______       _   
+    | \ | |     | | | ___ \      | ___ \     | |  
+    |  \| | ___ | |_| |_/ /_  __ | |_/ / ___ | |_ 
+    | . ` |/ _ \| __|  __/\ \/ / | ___ \/ _ \| __|
+    | |\  | (_) | |_| |    >  <  | |_/ / (_) | |_ 
+    \_| \_/\___/ \__\_|   /_/\_\ \____/ \___/ \__|
+                                                
+            NotPx Auto Paint & Claim by AliCloner - v1.0 {}""".format(Colors.BLUE, Colors.END))
     while True:
         option = input("[!] {}Enter 1{} For Adding Account and {}2 for start{} mine + claim: ".format(Colors.BLUE, Colors.END, Colors.BLUE, Colors.END))
         # option = "2"
