@@ -28,7 +28,7 @@ Upcoming features: 🤔
    ```bash
    $ python3 -m pip install -r req.txt
    ```
-2. Insert  your API Hash and API ID, which can be obtained from my.telegram.org under the Development section in main.py
+2. Insert  your API Hash and API ID, which can be obtained from my.telegram.org under the Development section in config.py
 
 3. Change your timezone in config.py.(your can get it from https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 
