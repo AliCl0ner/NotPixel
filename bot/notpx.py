@@ -12,7 +12,10 @@ class NotPx:
     def __init__(self, session_name:str) -> None:
         self.session = requests.Session()
         if config.USE_PROXY:
-            self.session.proxies = config.PROXIES
+            self.session.proxies = {
+                    "http": config.PROXIES,
+                    "https": config.PROXIES, 
+                }
             try:
                 if "http" not in self.session.proxies or "https" not in self.session.proxies:
                     raise ValueError(f"{Colors.RED}[ERROR]{Colors.END} Both 'http' and 'https' proxies must be defined.")
