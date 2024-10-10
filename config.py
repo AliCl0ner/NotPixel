@@ -10,9 +10,6 @@ RE_CHARGE_SPEED_MAX = 5 # max is 11
 X3_PIXEl = True # turn False if you wantt random
 # ================[proxy]================
 USE_PROXY = False # or put True if you want use it
-PROXIES = {
-    "http":"socks5://127.0.0.1:2080",
-    "https":"socks5://user:pass@127.0.0.1:2080", # if you using socks4 or http only replace it with "socks5"
-}
+PROXIE = "type://user:pass@ip:port" # you can remove user:pass@ if your proxy dont have user and password
 # ================[timezone]================
 TIMEZONE = "Asia/Tehran"  # Add this line for timezone
