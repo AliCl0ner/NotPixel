@@ -54,8 +54,5 @@ def process():
             else:
                 print("[x] Session {} {}already exist{}.".format(name, Colors.RED, Colors.END))
         elif option == "2":
-            print("{}Warning!{} Most airdrops utilize {}UTC detection to prevent cheating{}, which means they monitor your sleep patterns and the timing of your tasks. It's advisable to {}run your script when you're awake and to pause it before you go to sleep{}.".format(
-                Colors.YELLOW, Colors.END, Colors.YELLOW, Colors.END, Colors.YELLOW, Colors.END
-            ))
             multithread_starter()
             break
