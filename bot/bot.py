@@ -8,27 +8,34 @@ from bot.notpx import NotPx
 import config
 from telethon.sync import TelegramClient
 
-def multithread_starter():
+async def run_sessions(session_name):
+    cli = NotPx("sessions/" + session_name)
+    await cli.init_async()
+    # Run painters and mine_claimer concurrently
+    await asyncio.gather(
+        painters(cli, session_name),
+        mine_claimer(cli, session_name)
+    )
+
+async def start_all_sessions():
     dirs = os.listdir("sessions/")
     sessions = list(filter(lambda x: x.endswith(".session"), dirs))
     sessions = list(map(lambda x: x.split(".session")[0], sessions))
-    
+
+    tasks = []
     for session_name in sessions:
         try:
-            cli = NotPx("sessions/" + session_name)
-
-            # Define a wrapper function to run the async function in the thread
-            def run_painters():
-                asyncio.run(painters(cli, session_name))
-
-            def run_mine_claimer():
-                asyncio.run(mine_claimer(cli, session_name))
-
-            # Start threads for painters and mine_claimer
-            threading.Thread(target=run_painters).start()
-            threading.Thread(target=run_mine_claimer).start()
+            tasks.append(run_sessions(session_name))
         except Exception as e:
             print("[!] {}Error on load session{} \"{}\", error: {}".format(Colors.RED, Colors.END, session_name, e))
+
+    # Wait for all sessions to complete
+    await asyncio.gather(*tasks)
+
+def multithread_starter():
+    # Create a new thread to run the event loop
+    loop_thread = threading.Thread(target=lambda: asyncio.run(start_all_sessions()))
+    loop_thread.start()
 
 def process():
     if not os.path.exists("sessions"):
