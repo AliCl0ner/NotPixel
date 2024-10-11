@@ -15,8 +15,8 @@ class NotPx:
         # Proxy setup
         if config.USE_PROXY:
             self.session.proxies = {
-                "http": config.PROXIES,
-                "https": config.PROXIES,
+                "http": config.PROXIE,
+                "https": config.PROXIE,
             }
             try:
                 if "http" not in self.session.proxies or "https" not in self.session.proxies:
