@@ -8,7 +8,7 @@ async def mine_claimer(NotPxClient, session_name):
     print("[+] {}Auto claiming started{}.".format(Colors.CYAN, Colors.END))
     while True:
         await night_sleep()  # Check and sleep if it's between 12-1 AM Iran time
-        acc_data = NotPxClient.accountStatus()
+        acc_data = await NotPxClient.accountStatus()
         
         if acc_data is None:
             print("[!] {}{}{}: {}Failed to retrieve account status. Retrying...{}".format(Colors.CYAN, session_name, Colors.END, Colors.RED, Colors.END))
@@ -22,7 +22,7 @@ async def mine_claimer(NotPxClient, session_name):
             random_recharge_speed = random.randint(30,90)
 
             if fromStart * speedPerSecond > 0.3:
-                claimed_count = round(NotPxClient.claim_mining(), 2)
+                claimed_count = round(await NotPxClient.claim_mining(), 2)
                 print("[+] {}{}{}: {} NotPx Token {}Mined{}.".format(
                     Colors.CYAN, session_name, Colors.END,
                     claimed_count, Colors.GREEN, Colors.END
