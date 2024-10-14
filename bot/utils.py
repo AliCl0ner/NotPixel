@@ -2,6 +2,7 @@ import datetime
 import random
 import pytz
 import config
+import os
 import asyncio
 import json
 
@@ -54,12 +55,14 @@ async def night_sleep():
         await asyncio.sleep(sleep_duration * 3600)  # Use asyncio.sleep for non-blocking sleep
     else:
         print(f"[!] It's {now.strftime('%H:%M')} in {config.TIMEZONE}. Continuing script...")
+
 def load_data_from_json(file_path):
     with open(file_path, 'r') as file:
         return json.load(file)
+
 def calc_id(x: int, y: int, x1: int, y1: int):
     px_id = random.randint(min(y, y1), max(y1, y)) * 1000
-    px_id += random.randint(min(x, x1), max(x1, x)) + 1
+    px_id += random.randint(min(x, x1), max(x1, x)) + 2
     # print(px_id)
     return px_id
 def select_random_pixel(data):
