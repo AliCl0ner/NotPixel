@@ -77,7 +77,7 @@ class NotPx:
             # Handle NotPixel heavy load error
             if "failed to parse" in response.text:
                 print("[x] {}NotPixel internal error. Wait 5 minutes...{}".format(Colors.RED, Colors.END))
-                time.sleep(5 * 60)  # Use asyncio.sleep instead of time.sleep
+                time.sleep(5 * 60)
             elif response.status_code == 200:
                 # print(response.json())
                 if key_check in response.text:
@@ -85,7 +85,7 @@ class NotPx:
                 else:
                     raise Exception(report_bug_text.format(response.text))
             elif response.status_code >= 500:
-                time.sleep(5)  # Use asyncio.sleep for non-blocking sleep
+                time.sleep(5)
             else:
                 # Renew authentication within the existing event loop
                 try:
@@ -106,7 +106,8 @@ class NotPx:
                 requests.exceptions.Timeout) as e:
             print(f"[!] {Colors.RED}{type(e).__name__}{Colors.END} {end_point}. Sleeping for 5s...")
             time.sleep(5)
-
+        return self.request(method, end_point, key_check, data)
+        
     def claim_mining(self):
         return self.request("get", "/mining/claim", "claimed")['claimed'] 
 
