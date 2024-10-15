@@ -46,13 +46,13 @@ class Colors:
             del kernel32
             
 def night_sleep():
-    iran_tz = pytz.timezone(config.TIMEZONE)  # Use the timezone from config.py
-    now = datetime.datetime.now(iran_tz)
+    time_tz = pytz.timezone(config.TIMEZONE)  # Use the timezone from config.py
+    now = datetime.datetime.now(time_tz)
     
     if 0 <= now.hour < 2:  
         sleep_duration = random.randint(7, 10)
         print(f"[!] It's currently {now.strftime('%H:%M')} in {config.TIMEZONE}. Sleeping for {sleep_duration} hours...")
-        time.sleep(sleep_duration * 3600)  # Use asyncio.sleep for non-blocking sleep
+        time.sleep(sleep_duration * 3600)
     else:
         print(f"[!] It's {now.strftime('%H:%M')} in {config.TIMEZONE}. Continuing script...")
 
@@ -71,6 +71,4 @@ def select_random_pixel(data):
     random_cor = random.choice(paint['cordinates'])
     # print(f"{color}: {random_cor}")
     px_id = calc_id(random_cor['start'][0], random_cor['start'][1], random_cor['end'][0], random_cor['end'][1])
-
-    # Return the selected pixel and its color
     return color, px_id
