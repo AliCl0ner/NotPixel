@@ -8,47 +8,17 @@ from bot.notpx import NotPx
 import config
 from telethon.sync import TelegramClient
 
-async def run_sessions(session_name):
-    cli = NotPx("sessions/" + session_name)
-    await cli.init_async()
-    # Run painters and mine_claimer concurrently
-    await asyncio.gather(
-        painters(cli, session_name),
-        mine_claimer(cli, session_name)
-    )
-
-async def start_all_sessions():
+def multithread_starter():
     dirs = os.listdir("sessions/")
-    sessions = list(filter(lambda x: x.endswith(".session"), dirs))
-    sessions = list(map(lambda x: x.split(".session")[0], sessions))
-
-    tasks = []
+    sessions = list(filter(lambda x: x.endswith(".session"),dirs))
+    sessions = list(map(lambda x: x.split(".session")[0],sessions))
     for session_name in sessions:
         try:
-            tasks.append(run_sessions(session_name))
+            cli = NotPx("sessions/"+session_name)
+            threading.Thread(target=painters,args=[cli,session_name]).start()
+            threading.Thread(target=mine_claimer,args=[cli,session_name]).start()
         except Exception as e:
-            print("[!] {}Error on load session{} \"{}\", error: {}".format(Colors.RED, Colors.END, session_name, e))
-
-    # Wait for all sessions to complete
-    await asyncio.gather(*tasks)
-
-def multithread_starter():
-    # Function to run the event loop inside the thread
-    def run_event_loop():
-        # Create a new event loop
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)  # Set it as the current event loop
-        
-        try:
-            loop.run_until_complete(start_all_sessions())  # Run the event loop
-        finally:
-            loop.close()  # Close the loop when done
-
-    # Create a new thread to run the event loop
-    loop_thread = threading.Thread(target=run_event_loop)
-    loop_thread.start()
-    return loop_thread  # Return the thread to optionally join later
-
+            print("[!] {}Error on load session{} \"{}\", error: {}".format(Colors.RED,Colors.END,session_name,e))
 def process():
     if not os.path.exists("sessions"):
         os.mkdir("sessions")
@@ -72,6 +42,5 @@ def process():
             else:
                 print("[x] Session {} {}already exists{}.".format(name, Colors.RED, Colors.END))
         elif option == "2":
-            loop_thread = multithread_starter()  # Start the multithreaded session
-            loop_thread.join()  # Wait for the thread to complete
+            multithread_starter()
             break
