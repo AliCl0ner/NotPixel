@@ -47,7 +47,6 @@ def painters(NotPxClient, session_name):
                             
                             if pixelcolor != color:
                                 balance = NotPxClient.paintPixel(pixelid, color)
-                                print(balance)
                                 print("[+] {}{}{}: 1 {}Pixel painted{} successfully. User new balance: {}{}{}".format(
                                     Colors.CYAN, session_name, Colors.END,
                                     Colors.GREEN, Colors.END,
