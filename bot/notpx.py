@@ -127,7 +127,6 @@ class NotPx:
     def paintPixel(self, pixelformated, hex_color):
         data = {"pixelId": pixelformated, "newColor": hex_color}
         response = self.request("post", "/repaint/start", "balance", data)
-        print(response)
         return response['balance']
 
     def upgrade_paintreward(self):
