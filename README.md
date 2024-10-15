@@ -1,6 +1,6 @@
 # NotPixel
 
-Introducing the [NotPixel Bot](https://t.me/notpixel): 
+Introducing the [NotPixel Bot](https://t.me/notpixel/app?startapp=f914080369_s660800): 
 
 a fully automatic tool for claiming and painting. With built-in anti-detection features, it works efficiently and discreetly to get the best results. Simplify your tasks with the NotPixel Bot!
 ![d](https://github.com/AliCl0ner/NotPixel/blob/c5fbee0133c2b159c4d4a7e033c855c55d89ee22/shot.png)
