@@ -3,7 +3,7 @@ import random
 import pytz
 import config
 import os
-import asyncio
+import time
 import json
 
 class Colors:
@@ -44,15 +44,15 @@ class Colors:
             kernel32 = __import__("ctypes").windll.kernel32
             kernel32.SetConsoleMode(kernel32.GetStdHandle(-11), 7)
             del kernel32
-
-async def night_sleep():
+            
+def night_sleep():
     iran_tz = pytz.timezone(config.TIMEZONE)  # Use the timezone from config.py
     now = datetime.datetime.now(iran_tz)
     
     if 0 <= now.hour < 2:  
         sleep_duration = random.randint(7, 10)
         print(f"[!] It's currently {now.strftime('%H:%M')} in {config.TIMEZONE}. Sleeping for {sleep_duration} hours...")
-        await asyncio.sleep(sleep_duration * 3600)  # Use asyncio.sleep for non-blocking sleep
+        time.sleep(sleep_duration * 3600)  # Use asyncio.sleep for non-blocking sleep
     else:
         print(f"[!] It's {now.strftime('%H:%M')} in {config.TIMEZONE}. Continuing script...")
 
