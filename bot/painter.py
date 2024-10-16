@@ -9,6 +9,7 @@ def painters(NotPxClient, session_name):
     print("[+] {}Auto painting started{}.".format(Colors.CYAN, Colors.END))
     while True:
         try:
+            night_sleep()
             user_status = NotPxClient.accountStatus()  # Ensure accountStatus is an async function
             
             if not user_status:
