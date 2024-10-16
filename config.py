@@ -11,5 +11,6 @@ X3_PIXEl = True # turn False if you wantt random
 # ================[proxy]================
 USE_PROXY = False # or put True if you want use it
 PROXIE = "type://user:pass@ip:port" # you can remove user:pass@ if your proxy dont have user and password
-# ================[timezone]================
+# ================[nightsleep]================
+SLEEP = True #Make it False if u dont want night sleep(not recommended)
 TIMEZONE = "Asia/Tehran"  # Add this line for timezone
