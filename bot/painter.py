@@ -10,13 +10,12 @@ def painters(NotPxClient, session_name):
     while True:
         try:
             night_sleep()
-            user_status = NotPxClient.accountStatus()  # Ensure accountStatus is an async function
+            user_status = NotPxClient.accountStatus()
             
             if not user_status:
-                time.sleep(5)  # Avoid blocking with asyncio.sleep
+                time.sleep(5)
                 continue
             
-            # Accessing user_status assuming it's a dict
             charges = user_status['charges']
             balance = user_status['userBalance']
             levels_recharge = user_status['boosts']['reChargeSpeed'] + 1
