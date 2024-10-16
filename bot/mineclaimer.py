@@ -1,12 +1,14 @@
 import time
 import random
 from bot.utils import night_sleep, Colors
+import config
 
 def mine_claimer(NotPxClient, session_name):
     time.sleep(5)  # Start with a delay...
     print("[+] {}Auto claiming started{}.".format(Colors.CYAN, Colors.END))
     while True:
-        night_sleep()  # Check and sleep if it's between 12-1 AM Iran time
+        if config.SLEEP:
+            night_sleep()
         acc_data = NotPxClient.accountStatus()
         
         if acc_data is None:
